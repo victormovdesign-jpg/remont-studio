@@ -67,13 +67,18 @@
   const plSub = $('#pl-sub');
 
   function setLevel(sub) {
-    plRoot.hidden = sub;
-    plSub.hidden = !sub;
-    const shown = sub ? plSub : plRoot;
-    plRoot.classList.remove('slide-r', 'slide-l'); plSub.classList.remove('slide-r', 'slide-l');
-    void shown.offsetWidth; // restart animation
-    shown.classList.add(sub ? 'slide-r' : 'slide-l');
-    (sub ? $('#to-root') : $('#to-sub')).focus();
+    const shown = sub ? plSub : plRoot, gone = sub ? plRoot : plSub;
+    const anim = !reduced.matches;
+    [plRoot, plSub].forEach((l) => { l.classList.remove('lv-in-r', 'lv-in-l', 'lv-out-r', 'lv-out-l'); l.removeAttribute('style'); });
+    if (anim) {
+      // keep the outgoing level on screen, out of flow, so both levels move together
+      gone.style.cssText = `position:absolute;top:${gone.offsetTop}px;left:${gone.offsetLeft}px;width:${gone.offsetWidth}px`;
+      gone.classList.add(sub ? 'lv-out-l' : 'lv-out-r');
+      gone.addEventListener('animationend', () => { if (!/lv-out/.test(gone.className)) return; gone.hidden = true; gone.removeAttribute('style'); gone.classList.remove('lv-out-l', 'lv-out-r'); }, { once: true });
+    } else gone.hidden = true;
+    shown.hidden = false;
+    if (anim) shown.classList.add(sub ? 'lv-in-r' : 'lv-in-l');
+    (sub ? $('#to-root') : $('#to-sub')).focus({ preventScroll: true });
   }
   // pin the panel's bar to the navbar's exact on-screen box (no jump on open)
   function matchBar() {
@@ -87,7 +92,7 @@
     root.style.setProperty('--sbw', (window.innerWidth - root.clientWidth) + 'px');
     matchBar();
     panel.hidden = false;
-    plRoot.hidden = false; plSub.hidden = true; plRoot.classList.remove('slide-r', 'slide-l');
+    plRoot.hidden = false; plSub.hidden = true; [plRoot, plSub].forEach((l) => { l.className = l.className.replace(/\blv-\S+/g, '').trim(); l.removeAttribute('style'); });
     burger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
     $('#panel-close').focus();

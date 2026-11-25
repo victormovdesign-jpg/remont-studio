@@ -118,12 +118,16 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .pw { width: calc(100% - 32px); margin: 24px auto 0; flex: 1; display: flex; flex-direction: column; }
 .pl { display: flex; flex-direction: column; }
 .panel { overflow-x: hidden; }
-/* level switch: horizontal slide only — sub-menu comes in from the right, main menu slides back from the left */
-.pl.slide-r { animation: slide-r .35s var(--ease); }
-.pl.slide-l { animation: slide-l .35s var(--ease); }
-@keyframes slide-r { from { transform: translateX(100%); opacity: 0; } }
-@keyframes slide-l { from { transform: translateX(-100%); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .pl.slide-r, .pl.slide-l { animation: none; } }
+/* level switch: push transition — new level glides in, old one glides out the other side */
+.pw { position: relative; }
+.pl.lv-in-r  { animation: lv-in-r  .55s cubic-bezier(.22,1,.36,1) both; }
+.pl.lv-in-l  { animation: lv-in-l  .55s cubic-bezier(.22,1,.36,1) both; }
+.pl.lv-out-l { animation: lv-out-l .45s cubic-bezier(.22,1,.36,1) both; pointer-events: none; }
+.pl.lv-out-r { animation: lv-out-r .45s cubic-bezier(.22,1,.36,1) both; pointer-events: none; }
+@keyframes lv-in-r  { from { transform: translateX(40%);  opacity: 0; } }
+@keyframes lv-in-l  { from { transform: translateX(-40%); opacity: 0; } }
+@keyframes lv-out-l { to   { transform: translateX(-40%); opacity: 0; } }
+@keyframes lv-out-r { to   { transform: translateX(40%);  opacity: 0; } }
 .pi { font: 700 clamp(16px, 2.6cqi, 20px) var(--f-title); text-transform: uppercase; color: var(--navy); background: none; border: 0; padding: 14px 10px; display: flex; align-items: center; gap: 14px; width: 100%; text-decoration: none; cursor: pointer; text-align: left; border-radius: 14px; }
 .pi:hover { background: var(--blue-soft); }
 .pi-sub { justify-content: space-between; }
