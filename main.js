@@ -71,9 +71,17 @@
     plSub.hidden = !sub;
     (sub ? $('#to-root') : $('#to-sub')).focus();
   }
+  // pin the panel's bar to the navbar's exact on-screen box (no jump on open)
+  function matchBar() {
+    const r = navbar.getBoundingClientRect();
+    panel.style.setProperty('--nb-l', r.left + 'px');
+    panel.style.setProperty('--nb-t', r.top + 'px');
+    panel.style.setProperty('--nb-w', r.width + 'px');
+  }
   function openPanel() {
     setMega(false);
     root.style.setProperty('--sbw', (window.innerWidth - root.clientWidth) + 'px');
+    matchBar();
     panel.hidden = false;
     plRoot.hidden = false; plSub.hidden = true;
     burger.setAttribute('aria-expanded', 'true');
@@ -255,7 +263,7 @@
 
   /* ---------------- Init ---------------- */
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { onResize(); onScroll(); });
+  window.addEventListener('resize', () => { onResize(); onScroll(); if (!panel.hidden) matchBar(); });
   reduced.addEventListener('change', onScroll);
   onResize();
   update();

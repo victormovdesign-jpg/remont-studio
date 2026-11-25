@@ -456,11 +456,13 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 /* Panel (its own container) — tablet layout */
 .panel > .bar { margin: 12px 16px 0; }
 @container (max-width: 400px) { .panel > .bar { margin: 12px 10px 0; } .pw { width: calc(100% - 20px); } }
+/* JS copies the navbar's on-screen box here on open, so the bar never moves */
+.panel[style*="--nb-l"] > .bar { flex: none; margin: var(--nb-t) 0 0 var(--nb-l); width: var(--nb-w); }
 @container (min-width: 768px) and (max-width: 1199px) {
-  .pw { width: auto; max-width: none; margin: 28px 16px 0; padding: 0 8px 0 24px; flex: none; }
+  .pw { width: auto; max-width: none; margin: 28px 16px 0; padding: 0 8px 0 24px; flex: 1; }
   .pw .pi { font-size: 17px; padding: 18px 0; }
   .pw .pi-in { padding-left: 34px; }
-  .pcta { margin-top: 0; padding-top: 64px; gap: 24px; }
+  .pcta { margin-top: auto; padding-top: 64px; gap: 24px; }
   .pcta .btn { justify-content: center; }
 }
 
