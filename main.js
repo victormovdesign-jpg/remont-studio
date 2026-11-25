@@ -69,6 +69,10 @@
   function setLevel(sub) {
     plRoot.hidden = sub;
     plSub.hidden = !sub;
+    const shown = sub ? plSub : plRoot;
+    plRoot.classList.remove('slide-r', 'slide-l'); plSub.classList.remove('slide-r', 'slide-l');
+    void shown.offsetWidth; // restart animation
+    shown.classList.add(sub ? 'slide-r' : 'slide-l');
     (sub ? $('#to-root') : $('#to-sub')).focus();
   }
   // pin the panel's bar to the navbar's exact on-screen box (no jump on open)
@@ -83,7 +87,7 @@
     root.style.setProperty('--sbw', (window.innerWidth - root.clientWidth) + 'px');
     matchBar();
     panel.hidden = false;
-    plRoot.hidden = false; plSub.hidden = true;
+    plRoot.hidden = false; plSub.hidden = true; plRoot.classList.remove('slide-r', 'slide-l');
     burger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
     $('#panel-close').focus();
