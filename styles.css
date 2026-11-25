@@ -121,7 +121,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .pi { font: 700 clamp(16px, 2.6cqi, 20px) var(--f-title); text-transform: uppercase; color: var(--navy); background: none; border: 0; padding: 14px 10px; display: flex; align-items: center; gap: 14px; width: 100%; text-decoration: none; cursor: pointer; text-align: left; border-radius: 14px; }
 .pi:hover { background: var(--blue-soft); }
 .pi-sub { justify-content: space-between; }
-.pi-in { padding-left: 44px; }
+.pi-in { padding-left: 0; } /* sub items align with main menu items */
 .pcta { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 12px; }
 
 @keyframes in { from { opacity: 0; transform: translateY(-10px); } }
@@ -464,7 +464,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 @container (min-width: 768px) and (max-width: 1199px) {
   .pw { width: auto; max-width: none; margin: 28px 16px 0; padding: 0 8px 0 24px; flex: 1; }
   .pw .pi { font-size: 17px; padding: 18px 0; }
-  .pw .pi-in { padding-left: 34px; }
   .pcta { margin-top: auto; padding-top: 64px; gap: 24px; }
   .pcta .btn { justify-content: center; }
 }
