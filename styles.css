@@ -114,7 +114,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 
 /* mobile / tablet panel */
 /* panel bar sits exactly where the navbar is: same top, side padding and scrollbar offset */
-.panel { position: fixed; inset: 0; z-index: 60; background: var(--bg); padding: 0 var(--sbw, 0px) 24px 0; display: flex; flex-direction: column; overflow: auto; animation: in .3s; container-type: inline-size; font-family: var(--f-body); color: var(--navy); }
+.panel { position: fixed; inset: 0; z-index: 60; background: var(--bg); padding: 0 var(--sbw, 0px) 24px 0; display: flex; flex-direction: column; overflow: auto; animation: bgin .3s; container-type: inline-size; font-family: var(--f-body); color: var(--navy); }
 .pw { width: calc(100% - 32px); max-width: 640px; margin: 24px auto 0; flex: 1; display: flex; flex-direction: column; }
 .pl { display: flex; flex-direction: column; }
 .pl-sub { animation: in .25s; }
@@ -125,6 +125,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .pcta { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 12px; }
 
 @keyframes in { from { opacity: 0; transform: translateY(-10px); } }
+@keyframes bgin { from { background-color: rgba(245,247,250,0); } }
+.panel > .pw { animation: in .3s; } /* items slide, bar stays put */
 @keyframes mq { to { transform: translateX(-50%); } }
 
 /* ---------- 1. Hero ---------- */
