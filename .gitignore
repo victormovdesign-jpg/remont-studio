@@ -9,3 +9,7 @@ preview.command
 reference/
 mat/
 export-design/
+.vercel
+node_modules/
+package.json
+package-lock.json

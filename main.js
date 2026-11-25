@@ -73,6 +73,7 @@
   }
   function openPanel() {
     setMega(false);
+    root.style.setProperty('--sbw', (window.innerWidth - root.clientWidth) + 'px');
     panel.hidden = false;
     plRoot.hidden = false; plSub.hidden = true;
     burger.setAttribute('aria-expanded', 'true');
