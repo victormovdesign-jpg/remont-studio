@@ -1,0 +1,11 @@
+# Ship only the site. Working material stays local.
+.DS_Store
+.claude/
+CLAUDE.md
+*.pdf
+test-site_audit.md
+preview.command
+reference/
+mat/
+export-design/
+.gitignore
