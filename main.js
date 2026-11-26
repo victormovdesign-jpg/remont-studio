@@ -221,8 +221,8 @@
   /* ---------------- Growing bars when the steps grid enters view ---------------- */
   const steps = $('.steps');
   if ('IntersectionObserver' in window && steps) {
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { steps.classList.add('in-view'); io.disconnect(); } }), { threshold: 0.3 });
-    io.observe(steps);
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } }), { threshold: 0.5 });
+    steps.querySelectorAll('.sc').forEach((c) => io.observe(c));
   }
 
   /* ---------------- Builder chips ---------------- */
